@@ -1,0 +1,14 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven {
+            url 'https://oss.sonatype.org/content/repositories/snapshots'
+        }
+    }
+    dependencies {
+        classpath 'com.matthewcasperson:build:0.0.1-SNAPSHOT'
+    }
+}
+
+apply plugin: 'com.matthewcasperson.build.build'
