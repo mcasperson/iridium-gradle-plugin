@@ -14,7 +14,7 @@ import org.gradle.api.Project
 /**
  * Created by Matthew on 7/02/2016.
  */
-class APIOmegaLibrary implements
+class IridiumExtension implements
         Plugin<Project>,
         ApplyPluginsImpl,
         ConfigureJavaVersionImpl,

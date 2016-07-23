@@ -1,3 +1,8 @@
+This Gradle plugin has been written to automate common processes relating to the development
+or Iridium and its ecosystem. It adds the required configuration to publish to the Sonatype
+OSS repository, configures standard Maven repos, sets up Gradle wrapper versions, configures
+JavaDoc generation and more.
+
 To make use of this plugin, add the following to the build.gradle file:
 
 ```
