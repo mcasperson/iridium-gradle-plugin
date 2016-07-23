@@ -1,36 +1,27 @@
 package com.matthewcasperson.build
 
-import com.matthewcasperson.build.services.impl.apiomegalibrary.ConfigureDependenciesImpl
 import com.matthewcasperson.build.services.impl.shared.ApplyPluginsImpl
-import com.matthewcasperson.build.services.impl.shared.ConfigureArtifactsImpl
-import com.matthewcasperson.build.services.impl.shared.ConfigureBuildScriptImpl
-import com.matthewcasperson.build.services.impl.shared.ConfigureJavaVersionImpl
-import com.matthewcasperson.build.services.impl.shared.ConfigureJavadocImpl
-import com.matthewcasperson.build.services.impl.shared.ConfigureMavenImpl
-import com.matthewcasperson.build.services.impl.shared.ConfigureWrapperImpl
-import com.matthewcasperson.build.services.impl.shared.SonatypePublishingImpl
+import com.matthewcasperson.build.services.impl.shared.*
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
 /**
  * Created by Matthew on 7/02/2016.
  */
-class IridiumExtension implements
+class Iridium implements
         Plugin<Project>,
         ApplyPluginsImpl,
         ConfigureJavaVersionImpl,
         ConfigureMavenImpl,
         SonatypePublishingImpl,
         ConfigureWrapperImpl,
-        ConfigureDependenciesImpl,
         ConfigureJavadocImpl,
         ConfigureArtifactsImpl,
-        ConfigureBuildScriptImpl{
+        ConfigureBuildScriptImpl {
 
     void apply(Project project) {
         configureBuildScript(project);
         applyPlugins(project);
-        configureDependencies(project);
         configureArtifacts(project);
         configureSonatypePublishing(project);
         configureJavaVersion(project);

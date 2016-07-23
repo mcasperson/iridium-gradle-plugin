@@ -1,4 +1,4 @@
-package com.matthewcasperson.build.services.impl.apiomegalibrary
+package com.matthewcasperson.build.services.impl.shared
 
 import com.matthewcasperson.build.services.ConfigureBuildScript
 import org.gradle.api.Project
