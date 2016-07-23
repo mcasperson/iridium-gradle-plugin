@@ -4,6 +4,7 @@ import com.matthewcasperson.build.services.impl.apiomegalibrary.ConfigureDepende
 import com.matthewcasperson.build.services.impl.shared.ApplyPluginsImpl
 import com.matthewcasperson.build.services.impl.shared.ConfigureArtifactsImpl
 import com.matthewcasperson.build.services.impl.shared.ConfigureBuildScriptImpl
+import com.matthewcasperson.build.services.impl.shared.ConfigureCheckstyleImpl
 import com.matthewcasperson.build.services.impl.shared.ConfigureJavaVersionImpl
 import com.matthewcasperson.build.services.impl.shared.ConfigureJavadocImpl
 import com.matthewcasperson.build.services.impl.shared.ConfigureMavenImpl
@@ -25,11 +26,11 @@ class IridiumExtension implements
         ConfigureDependenciesImpl,
         ConfigureJavadocImpl,
         ConfigureArtifactsImpl,
-        ConfigureBuildScriptImpl{
+        ConfigureCheckstyleImpl{
 
     void apply(Project project) {
-        configureBuildScript(project);
         applyPlugins(project);
+        configureCheckstyle(project);
         configureDependencies(project);
         configureArtifacts(project);
         configureSonatypePublishing(project);

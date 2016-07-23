@@ -17,11 +17,11 @@ class Iridium implements
         ConfigureWrapperImpl,
         ConfigureJavadocImpl,
         ConfigureArtifactsImpl,
-        ConfigureBuildScriptImpl {
+        ConfigureCheckstyleImpl {
 
     void apply(Project project) {
-        configureBuildScript(project);
         applyPlugins(project);
+        configureCheckstyle(project);
         configureArtifacts(project);
         configureSonatypePublishing(project);
         configureJavaVersion(project);
