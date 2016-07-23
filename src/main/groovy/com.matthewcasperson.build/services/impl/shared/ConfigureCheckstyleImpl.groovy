@@ -5,7 +5,7 @@ import org.gradle.api.Project
 import org.gradle.api.plugins.quality.Checkstyle
 
 /**
- * Created by matthewcasperson on 24/07/2016.
+ * Configures the checkstyle task to use a supplied set of rules
  */
 trait ConfigureCheckstyleImpl implements ConfigureCheckstyle {
     void configureCheckstyle(Project project) {
@@ -13,19 +13,10 @@ trait ConfigureCheckstyleImpl implements ConfigureCheckstyle {
 
         project.plugins.apply('checkstyle');
 
-        project.checkstyle {
-            toolVersion = '6.18'
-            config = getClass().getClassLoader().getResourceAsStream("checkstyle.xml").text;
-            showViolations = true
-            ignoreFailures = false
-        }
-
-        project.tasks.withType(Checkstyle) {
-            ignoreFailures = false
-            reports {
-                html.destination project.rootProject.file("${buildDir}/reports/checkstyle.html")
-            }
-        }
-
+        Checkstyle checkstyle = project.getTasksByName('checkstyle', false).first();
+        checkstyle.showViolations = true;
+        checkstyle.ignoreFailures = false;
+        checkstyle.config = getClass().getClassLoader().getResourceAsStream("checkstyle.xml").text;
+        checkstyle.reports.html.destination project.rootProject.file("${buildDir}/reports/checkstyle.html");
     }
 }
