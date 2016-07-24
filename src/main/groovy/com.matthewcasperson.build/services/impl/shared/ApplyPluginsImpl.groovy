@@ -9,9 +9,5 @@ trait ApplyPluginsImpl {
     void applyPlugins(Project project) {
         assert project != null;
         project.plugins.apply('java');
-        project.plugins.apply('propdeps');
-        project.plugins.apply('propdeps-maven');
-        project.plugins.apply('propdeps-idea');
-        project.plugins.apply('propdeps-eclipse');
     }
 }
