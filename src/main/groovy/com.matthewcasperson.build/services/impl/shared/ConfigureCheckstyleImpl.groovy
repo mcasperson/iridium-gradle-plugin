@@ -13,10 +13,12 @@ trait ConfigureCheckstyleImpl implements ConfigureCheckstyle {
 
         project.plugins.apply('checkstyle');
 
-        Checkstyle checkstyle = project.getTasksByName('checkstyle', false).first();
+        def checkStyleRules = getClass().getClassLoader().getResourceAsStream("checkstyle.xml").text;
+
+        Checkstyle checkstyle = project.tasks.withType(Checkstyle).first();
         checkstyle.showViolations = true;
         checkstyle.ignoreFailures = false;
-        checkstyle.config = getClass().getClassLoader().getResourceAsStream("checkstyle.xml").text;
-        checkstyle.reports.html.destination project.rootProject.file("${buildDir}/reports/checkstyle.html");
+        checkstyle.config = project.resources.text.fromString(checkStyleRules);
+        checkstyle.reports.html.destination = project.rootProject.file("${project.buildDir}/reports/checkstyle.html");
     }
 }
