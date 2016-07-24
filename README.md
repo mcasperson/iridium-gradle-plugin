@@ -22,7 +22,7 @@ buildscript {
     }
 }
 
-apply plugin: 'com.matthewcasperson.iridiumextension'
+apply plugin: 'com.matthewcasperson.build.iridiumextension'
 ```
 
 To publish to Sonatype, save your username and password in the ~/.gradle/gradle.properties file:
