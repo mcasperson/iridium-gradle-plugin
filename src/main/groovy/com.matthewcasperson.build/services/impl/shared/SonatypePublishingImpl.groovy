@@ -1,12 +1,8 @@
 package com.matthewcasperson.build.services.impl.shared
 
 import com.matthewcasperson.build.services.SonatypePublishing
-import com.matthewcasperson.build.services.impl.tasks.JavadocJarTask
-import com.matthewcasperson.build.services.impl.tasks.SourceJarTask
 import org.gradle.api.Project
 import org.gradle.api.artifacts.maven.MavenDeployment
-import org.gradle.api.publish.maven.MavenPublication
-import org.gradle.plugins.signing.Sign
 
 /**
  * An implementation that is shared across APIOmega projects to provide a way to publish to Sonatype
