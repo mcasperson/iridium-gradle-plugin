@@ -3,6 +3,7 @@ package com.matthewcasperson.build.services.impl.shared
 import com.matthewcasperson.build.services.ConfigureCheckstyle
 import org.gradle.api.Project
 import org.gradle.api.plugins.quality.Checkstyle
+import org.gradle.api.plugins.quality.CheckstyleExtension
 
 /**
  * Configures the checkstyle task to use a supplied set of rules
@@ -15,11 +16,15 @@ trait ConfigureCheckstyleImpl implements ConfigureCheckstyle {
 
         def checkStyleRules = getClass().getClassLoader().getResourceAsStream("checkstyle.xml").text;
 
-        Checkstyle checkstyle = project.tasks.withType(Checkstyle).first();
-        checkstyle.properties.put('toolVersion', '6.18');
-        checkstyle.showViolations = true;
-        checkstyle.ignoreFailures = false;
-        checkstyle.config = project.resources.text.fromString(checkStyleRules);
-        checkstyle.reports.html.destination = project.rootProject.file("${project.buildDir}/reports/checkstyle.html");
+        CheckstyleExtension checkstyleExtension = project.extensions.findByType(CheckstyleExtension);
+        checkstyleExtension.toolVersion = '6.18';
+        checkstyleExtension.showViolations = true;
+        checkstyleExtension.ignoreFailures = false;
+        checkstyleExtension.config = project.resources.text.fromString(checkStyleRules);
+
+        Checkstyle checkStyle = project.extensions.findByType(Checkstyle);
+        checkStyle.showViolations = true;
+        checkStyle.ignoreFailures = false;
+        checkStyle.reports.html.destination = project.rootProject.file("${project.buildDir}/reports/checkstyle.html");
     }
 }
