@@ -4,6 +4,7 @@ import com.matthewcasperson.build.services.SonatypePublishing
 import com.matthewcasperson.build.services.impl.tasks.JavadocJarTask
 import com.matthewcasperson.build.services.impl.tasks.SourceJarTask
 import org.gradle.api.Project
+import org.gradle.api.artifacts.maven.MavenDeployment
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.plugins.signing.Sign
 
@@ -34,66 +35,61 @@ trait SonatypePublishingImpl implements SonatypePublishing {
         assert project.hasProperty('ArchivesBaseName') : 'You need to define the ArchivesBaseName property in the gradle.properties file'
         assert project.hasProperty('Version') : 'You need to define the Version property in the gradle.properties file'
 
+        project.plugins.apply('maven');
+        project.plugins.apply('signing');
+
+        def artifactGroup = project.getProperties().get('Group');
+        def artifactName = project.getProperties().get('ArchivesBaseName');
+        def artifactVersion = project.getProperties().get('Version');
+        def username = project.getProperties().get('ossrhUsername')
+        def password = project.getProperties().get('ossrhPassword')
+
         project.signing {
             sign project.configurations.archives
         }
 
-        project.publishing {
-            def artifactName = project.getProperties().get('ArchivesBaseName');
-            def artifactVersion = project.getProperties().get('Version');
-
-            publications {
-                mavenJava(MavenPublication) {
-
-                    getPom().withXml {
-                        def root = asNode()
-                        root.appendNode('name', project.getProperties().get('MavenName'))
-                        root.appendNode('description', project.getProperties().get('MavenDescription'))
-                        root.appendNode('url', project.getProperties().get('MavenURL'))
-
-                        def scm = root.appendNode('scm')
-                        scm.appendNode('url', project.getProperties().get('MavenSCMURL'))
-                        scm.appendNode('connection', project.getProperties().get('MavenSCMConnection'))
-                        scm.appendNode('developerConnection', project.getProperties().get('MavenSCMConnection'))
-
-                        def license = root.appendNode('licenses').appendNode('license')
-                        license.appendNode('name', project.getProperties().get('MavenLicenseName'))
-                        license.appendNode('url', project.getProperties().get('MavenLicenseURL'))
-
-                        def developer = root.appendNode('developers').appendNode('developer')
-                        developer.appendNode('id', project.getProperties().get('MavenDeveloperID'))
-                        developer.appendNode('name', project.getProperties().get('MavenDeveloperName'))
-                        developer.appendNode('email', project.getProperties().get('MavenDeveloperEMail'))
-                    }
-
-                    groupId project.getProperties().get('Group')
-                    artifactId artifactName
-                    version artifactVersion
-
-                    from project.components.java
-
-                    artifact (project.tasks.getByName('javadocJar'))
-                    artifact (project.tasks.getByName('sourceJar'))
-
-                    project.tasks.withType(Sign).each {
-                        it.signatures.each {
-                            artifact (it)
-                        }
-                    }
-                }
-            }
-
+        project.uploadArchives {
             repositories {
-                maven {
-                    credentials {
-                        username project.getProperties().get('ossrhUsername')
-                        password project.getProperties().get('ossrhPassword')
+                mavenDeployer {
+                    beforeDeployment { MavenDeployment deployment -> project.signing.signPom(deployment) }
+
+                    getPom().groupId = artifactGroup
+                    getPom().artifactId = artifactName
+                    getPom().version = artifactVersion
+
+                    repository(url: RELEASES_REPO) {
+                        authentication(userName: username, password: password)
+                    }
+                    snapshotRepository(url: SNAPSHOTS_REPO) {
+                        authentication(userName: username, password: password)
                     }
 
-                    if(project.getProperties().get('Version').endsWith('-SNAPSHOT')) {
-                        url SNAPSHOTS_REPO
-                    } else {
-                        url RELEASES_REPO
+                    getPom().project {
+                        name project.getProperties().get('MavenName')
+                        packaging 'jar'
+                        description project.getProperties().get('MavenDescription')
+                        url project.getProperties().get('MavenURL')
+
+                        scm {
+                            url project.getProperties().get('MavenSCMURL')
+                            connection project.getProperties().get('MavenSCMConnection')
+                            developerConnection project.getProperties().get('MavenSCMConnection')
+                        }
+
+                        licenses {
+                            license {
+                                name project.getProperties().get('MavenLicenseName')
+                                url project.getProperties().get('MavenLicenseURL')
+                            }
+                        }
+
+                        developers {
+                            developer {
+                                id project.getProperties().get('MavenDeveloperID')
+                                name project.getProperties().get('MavenDeveloperName')
+                                email project.getProperties().get('MavenDeveloperEMail')
+                            }
+                        }
                     }
                 }
             }

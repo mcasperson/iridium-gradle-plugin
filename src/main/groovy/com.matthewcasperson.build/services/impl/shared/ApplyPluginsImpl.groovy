@@ -13,7 +13,5 @@ trait ApplyPluginsImpl {
         project.plugins.apply('propdeps-maven');
         project.plugins.apply('propdeps-idea');
         project.plugins.apply('propdeps-eclipse');
-        project.plugins.apply('maven-publish');
-        project.plugins.apply('signing');
     }
 }
