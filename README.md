@@ -13,6 +13,9 @@ buildscript {
         maven {
             url 'https://oss.sonatype.org/content/repositories/snapshots'
         }
+        maven {
+            url 'https://oss.sonatype.org/content/repositories/releases'
+        }
     }
     dependencies {
         classpath 'com.matthewcasperson:build:0.0.1'
