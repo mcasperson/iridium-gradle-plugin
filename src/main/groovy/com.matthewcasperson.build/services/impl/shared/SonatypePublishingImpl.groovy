@@ -5,6 +5,7 @@ import com.matthewcasperson.build.services.impl.tasks.JavadocJarTask
 import com.matthewcasperson.build.services.impl.tasks.SourceJarTask
 import org.gradle.api.Project
 import org.gradle.api.publish.maven.MavenPublication
+import org.gradle.plugins.signing.Sign
 
 /**
  * An implementation that is shared across APIOmega projects to provide a way to publish to Sonatype
@@ -38,6 +39,9 @@ trait SonatypePublishingImpl implements SonatypePublishing {
         }
 
         project.publishing {
+            def artifactName = project.getProperties().get('ArchivesBaseName');
+            def artifactVersion = project.getProperties().get('Version');
+
             publications {
                 mavenJava(MavenPublication) {
 
@@ -63,13 +67,19 @@ trait SonatypePublishingImpl implements SonatypePublishing {
                     }
 
                     groupId project.getProperties().get('Group')
-                    artifactId project.getProperties().get('ArchivesBaseName')
-                    version project.getProperties().get('Version')
+                    artifactId artifactName
+                    version artifactVersion
 
                     from project.components.java
 
                     artifact (project.tasks.getByName('javadocJar'))
                     artifact (project.tasks.getByName('sourceJar'))
+
+                    project.tasks.withType(Sign).each {
+                        it.signatures.each {
+                            artifact (it)
+                        }
+                    }
                 }
             }
 
