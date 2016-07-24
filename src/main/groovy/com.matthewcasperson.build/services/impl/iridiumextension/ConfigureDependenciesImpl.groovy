@@ -4,15 +4,17 @@ import com.matthewcasperson.build.services.ConfigureDependencies
 import org.gradle.api.Project
 
 /**
- * Created by Matthew on 7/02/2016.
+ * Defines the common dependencies used by iridium extensions
  */
 trait ConfigureDependenciesImpl implements ConfigureDependencies {
     def junitVersion = '4.12'
+    def iridiumVersion = '0.+'
 
     void configureDependencies(Project project) {
         assert project != null;
 
         project.dependencies {
+            compile 'com.matthewcasperson:iridium:' + iridiumVersion
             testCompile 'junit:junit:' + junitVersion
         }
     }
