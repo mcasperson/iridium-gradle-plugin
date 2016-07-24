@@ -18,7 +18,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.matthewcasperson:build:0.0.1'
+        classpath 'com.matthewcasperson:build:0.+'
     }
 }
 
