@@ -22,7 +22,7 @@ trait ConfigureCheckstyleImpl implements ConfigureCheckstyle {
         checkstyleExtension.ignoreFailures = false;
         checkstyleExtension.config = project.resources.text.fromString(checkStyleRules);
 
-        Checkstyle checkStyle = project.extensions.findByType(Checkstyle);
+        Checkstyle checkStyle = project.tasks.withType(Checkstyle);
         checkStyle.showViolations = true;
         checkStyle.ignoreFailures = false;
         checkStyle.reports.html.destination = project.rootProject.file("${project.buildDir}/reports/checkstyle.html");
