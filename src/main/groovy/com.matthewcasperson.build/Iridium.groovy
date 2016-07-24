@@ -6,7 +6,11 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 
 /**
- * Created by Matthew on 7/02/2016.
+ * A plugin used to build the main Iridium application. This plugin
+ * leave a lot of configuration to the build.gradle file, because
+ * things like dependencies and system properties passed through to
+ * the run command are not shared. Where functionality is shared
+ * (deploy to Sonatype, javadoc config etc) it is implemented here.
  */
 class Iridium implements
         Plugin<Project>,
@@ -17,10 +21,12 @@ class Iridium implements
         ConfigureWrapperImpl,
         ConfigureJavadocImpl,
         ConfigureArtifactsImpl,
-        ConfigureCheckstyleImpl {
+        ConfigureCheckstyleImpl,
+        ConfigureXercesVersionImpl{
 
     void apply(Project project) {
         applyPlugins(project);
+        configureXercesVersion(project);
         configureCheckstyle(project);
         configureArtifacts(project);
         configureSonatypePublishing(project);

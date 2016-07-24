@@ -16,6 +16,7 @@ trait ConfigureCheckstyleImpl implements ConfigureCheckstyle {
         def checkStyleRules = getClass().getClassLoader().getResourceAsStream("checkstyle.xml").text;
 
         Checkstyle checkstyle = project.tasks.withType(Checkstyle).first();
+        checkstyle.properties.put('toolVersion', '6.18');
         checkstyle.showViolations = true;
         checkstyle.ignoreFailures = false;
         checkstyle.config = project.resources.text.fromString(checkStyleRules);
