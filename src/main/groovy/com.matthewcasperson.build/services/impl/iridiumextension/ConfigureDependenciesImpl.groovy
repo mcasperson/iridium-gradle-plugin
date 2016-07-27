@@ -14,7 +14,7 @@ trait ConfigureDependenciesImpl implements ConfigureDependencies {
         assert project != null;
 
         project.dependencies {
-            compile 'com.matthewcasperson:iridium:' + iridiumVersion
+            providedCompile 'com.matthewcasperson:iridium:' + iridiumVersion
             testCompile 'junit:junit:' + junitVersion
         }
     }
