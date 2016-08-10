@@ -34,23 +34,23 @@ trait SonatypePublishingImpl implements SonatypePublishing {
         project.plugins.apply('maven');
         project.plugins.apply('signing');
 
-        def artifactGroup = project.getProperties().get('Group') ?: System.getenv('Group');
-        def artifactName = project.getProperties().get('ArchivesBaseName') ?: System.getenv('ArchivesBaseName');
-        def artifactVersion = project.getProperties().get('Version') ?: System.getenv('Version');
-        def username = project.getProperties().get('ossrhUsername') ?: System.getenv('ossrhUsername');
-        def password = project.getProperties().get('ossrhPassword') ?: System.getenv('ossrhPassword');
-        def mavenName = project.getProperties().get('MavenName') ?: System.getenv('MavenName');
-        def mavenDescription = project.getProperties().get('MavenDescription') ?: System.getenv('MavenDescription');
-        def mavenUrl = project.getProperties().get('MavenURL') ?: System.getenv('MavenURL');
-        def mavenScmUrl = project.getProperties().get('MavenSCMURL') ?: System.getenv('MavenSCMURL');
-        def mavenScmConnection = project.getProperties().get('MavenSCMConnection') ?: System.getenv('MavenSCMConnection');
-        def mavenLicenseName = project.getProperties().get('MavenLicenseName') ?: System.getenv('MavenLicenseName');
-        def mavenLicenseUrl = project.getProperties().get('MavenLicenseURL') ?: System.getenv('MavenLicenseURL');
-        def mavenDeveloperId = project.getProperties().get('MavenDeveloperID') ?: System.getenv('MavenDeveloperID');
-        def mavenDeveloperName = project.getProperties().get('MavenDeveloperName') ?: System.getenv('MavenDeveloperName');
-        def mavenDeveloperEmail = project.getProperties().get('MavenDeveloperEMail') ?: System.getenv('MavenDeveloperEMail');
+        def artifactGroup = project.hasProperty('Group') ? project.getProperties().get('Group') : System.getenv('Group');
+        def artifactName = project.hasProperty('ArchivesBaseName') ? project.getProperties().get('ArchivesBaseName') : System.getenv('ArchivesBaseName');
+        def artifactVersion = project.hasProperty('Version') ? project.getProperties().get('Version') : System.getenv('Version');
+        def username = project.hasProperty('ossrhUsername') ? project.getProperties().get('ossrhUsername') : System.getenv('ossrhUsername');
+        def password = project.hasProperty('ossrhPassword') ? project.getProperties().get('ossrhPassword') : System.getenv('ossrhPassword');
+        def mavenName = project.hasProperty('MavenName') ? project.getProperties().get('MavenName') : System.getenv('MavenName');
+        def mavenDescription = project.hasProperty('MavenDescription') ? project.getProperties().get('MavenDescription') : System.getenv('MavenDescription');
+        def mavenUrl = project.hasProperty('MavenURL') ? project.getProperties().get('MavenURL') : System.getenv('MavenURL');
+        def mavenScmUrl = project.hasProperty('MavenSCMURL') ? project.getProperties().get('MavenSCMURL') : System.getenv('MavenSCMURL');
+        def mavenScmConnection = project.hasProperty('MavenSCMConnection') ? project.getProperties().get('MavenSCMConnection') : System.getenv('MavenSCMConnection');
+        def mavenLicenseName = project.hasProperty('MavenLicenseName') ? project.getProperties().get('MavenLicenseName') : System.getenv('MavenLicenseName');
+        def mavenLicenseUrl = project.hasProperty('MavenLicenseURL') ? project.getProperties().get('MavenLicenseURL') : System.getenv('MavenLicenseURL');
+        def mavenDeveloperId = project.hasProperty('MavenDeveloperID') ? project.getProperties().get('MavenDeveloperID') : System.getenv('MavenDeveloperID');
+        def mavenDeveloperName = project.hasProperty('MavenDeveloperName') ? project.getProperties().get('MavenDeveloperName') : System.getenv('MavenDeveloperName');
+        def mavenDeveloperEmail = project.hasProperty('MavenDeveloperEMail') ? project.getProperties().get('MavenDeveloperEMail') : System.getenv('MavenDeveloperEMail');
 
-        def signingDisabledValue = project.getProperties().get('DisableSigning') ?: System.getenv('DisableSigning');
+        def signingDisabledValue = project.hasProperty('DisableSigning') ? project.getProperties().get('DisableSigning') : System.getenv('DisableSigning');
         def signingDisabled = Boolean.parseBoolean(signingDisabledValue);
 
         project.signing {
