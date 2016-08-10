@@ -54,7 +54,7 @@ trait SonatypePublishingImpl implements SonatypePublishing {
         def signingDisabled = Boolean.parseBoolean(signingDisabledValue);
 
         project.signing {
-            required = !signingDisabled
+            required !signingDisabled
             sign project.configurations.archives
         }
 
