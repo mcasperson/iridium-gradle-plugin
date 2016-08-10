@@ -13,7 +13,6 @@ trait BuildConfigureDependencies implements ConfigureDependencies {
         project.dependencies {
             compile gradleApi()
             compile localGroovy()
-            compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
         }
     }
 }
