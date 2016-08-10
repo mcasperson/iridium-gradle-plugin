@@ -50,7 +50,11 @@ trait SonatypePublishingImpl implements SonatypePublishing {
         def mavenDeveloperName = project.getProperties().get('MavenDeveloperName') ?: System.getenv('MavenDeveloperName');
         def mavenDeveloperEmail = project.getProperties().get('MavenDeveloperEMail') ?: System.getenv('MavenDeveloperEMail');
 
+        def signingDisabledValue = project.getProperties().get('DisableSigning') ?: System.getenv('DisableSigning');
+        def signingDisabled = Boolean.parseBoolean(signingDisabledValue);
+
         project.signing {
+            required = !signingDisabled
             sign project.configurations.archives
         }
 
