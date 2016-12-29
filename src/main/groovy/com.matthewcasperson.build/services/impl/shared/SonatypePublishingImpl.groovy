@@ -27,16 +27,16 @@ trait SonatypePublishingImpl implements SonatypePublishing {
         assert project.hasProperty('MavenDeveloperID') || System.getenv('MavenDeveloperID') != null : 'You need to define the MavenDeveloperID property in the gradle.properties file'
         assert project.hasProperty('MavenDeveloperName') || System.getenv('MavenDeveloperName') != null : 'You need to define the MavenDeveloperName property in the gradle.properties file'
         assert project.hasProperty('MavenDeveloperEMail') || System.getenv('MavenDeveloperEMail') != null : 'You need to define the MavenDeveloperEMail property in the gradle.properties file'
-        assert project.hasProperty('Group') || System.getenv('Group') != null : 'You need to define the Group property in the gradle.properties file'
+        assert project.hasProperty('MavenGroup') || System.getenv('MavenGroup') != null: 'You need to define the Group property in the gradle.properties file'
         assert project.hasProperty('ArchivesBaseName') || System.getenv('ArchivesBaseName') != null : 'You need to define the ArchivesBaseName property in the gradle.properties file'
-        assert project.hasProperty('Version') || System.getenv('Version') != null : 'You need to define the Version property in the gradle.properties file'
+        assert project.hasProperty('MavenVersion') || System.getenv('MavenVersion') != null: 'You need to define the Version property in the gradle.properties file'
 
         project.plugins.apply('maven');
         project.plugins.apply('signing');
 
-        def artifactGroup = project.hasProperty('Group') ? project.getProperties().get('Group') : System.getenv('Group');
+        def artifactGroup = project.hasProperty('MavenGroup') ? project.getProperties().get('MavenGroup') : System.getenv('MavenGroup');
         def artifactName = project.hasProperty('ArchivesBaseName') ? project.getProperties().get('ArchivesBaseName') : System.getenv('ArchivesBaseName');
-        def artifactVersion = project.hasProperty('Version') ? project.getProperties().get('Version') : System.getenv('Version');
+        def artifactVersion = project.hasProperty('MavenVersion') ? project.getProperties().get('MavenVersion') : System.getenv('MavenVersion');
         def username = project.hasProperty('ossrhUsername') ? project.getProperties().get('ossrhUsername') : System.getenv('ossrhUsername');
         def password = project.hasProperty('ossrhPassword') ? project.getProperties().get('ossrhPassword') : System.getenv('ossrhPassword');
         def mavenName = project.hasProperty('MavenName') ? project.getProperties().get('MavenName') : System.getenv('MavenName');
