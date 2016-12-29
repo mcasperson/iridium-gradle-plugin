@@ -2,10 +2,9 @@ package com.matthewcasperson.build.services.impl.shared
 
 import com.matthewcasperson.build.services.ConfigureMaven
 import org.gradle.api.Project
-import org.gradle.api.tasks.bundling.Jar
 
 /**
- * An implementation that is shared across APIOmega projects to configure the various
+ * An implementation that is shared across Iridium projects to configure the various
  * maven repos that we will be using
  */
 trait ConfigureMavenImpl implements ConfigureMaven {
@@ -19,6 +18,9 @@ trait ConfigureMavenImpl implements ConfigureMaven {
             }
             maven {
                 url 'http://repository.springsource.com/maven/bundles/external'
+            }
+            maven {
+                url 'https://maven.repository.redhat.com/ga/'
             }
         }
     }
