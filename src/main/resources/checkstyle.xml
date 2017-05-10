@@ -17,15 +17,15 @@
 
 	<module name="SuppressWarningsFilter" />
 
-	<module name="FinalParameters">
-		<property name="ignorePrimitiveTypes" value="true"/>
-	</module>
-
 
 	<module name="TreeWalker">
 
 		<!-- Miscellaneous other checks.                   -->
 		<!-- See http://checkstyle.sf.net/config_misc.html -->
+
+		<module name="FinalParameters">
+			<property name="ignorePrimitiveTypes" value="true"/>
+		</module>
 
 		<module name="OuterTypeFilename"/>
 		<module name="IllegalTokenText">
