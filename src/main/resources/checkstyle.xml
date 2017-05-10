@@ -17,6 +17,10 @@
 
 	<module name="SuppressWarningsFilter" />
 
+	<module name="FinalParameters">
+		<property name="ignorePrimitiveTypes" value="true"/>
+	</module>
+
 
 	<module name="TreeWalker">
 
