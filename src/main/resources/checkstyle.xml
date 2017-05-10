@@ -14,6 +14,7 @@
 	<!-- See http://checkstyle.sf.net/config_sizes.html -->
 	<module name="FileLength"/>
 
+
 	<module name="SuppressWarningsFilter" />
 
 
@@ -21,11 +22,6 @@
 
 		<!-- Miscellaneous other checks.                   -->
 		<!-- See http://checkstyle.sf.net/config_misc.html -->
-		<module name="RegexpSinglelineJava">
-			<property name="format" value="^\t* +\t*\S" />
-			<property name="message" value="Line has leading space characters; indentation should be performed with tabs only." />
-			<property name="ignoreComments" value="true" />
-		</module>
 
 		<module name="OuterTypeFilename"/>
 		<module name="IllegalTokenText">
