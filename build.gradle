@@ -11,4 +11,5 @@ buildscript {
     }
 }
 
+// Use the old version of the plugin to build the new version
 apply plugin: 'com.matthewcasperson.build.build'
