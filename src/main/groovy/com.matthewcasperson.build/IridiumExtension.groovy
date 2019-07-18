@@ -22,7 +22,6 @@ class IridiumExtension implements
         ConfigureJavaVersionImpl,
         ConfigureMavenImpl,
         SonatypePublishingImpl,
-        ConfigureWrapperImpl,
         ConfigureDependenciesImpl,
         ConfigureJavadocImpl,
         ConfigureArtifactsImpl,
@@ -38,7 +37,6 @@ class IridiumExtension implements
         configureSonatypePublishing(project);
         configureJavaVersion(project);
         configureMaven(project);
-        configureWrapper(project);
         configureJavadoc(project);
     }
 }
