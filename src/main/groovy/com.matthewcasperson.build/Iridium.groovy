@@ -1,6 +1,5 @@
 package com.matthewcasperson.build
 
-import com.matthewcasperson.build.services.impl.shared.ApplyPluginsImpl
 import com.matthewcasperson.build.services.impl.shared.*
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -18,7 +17,6 @@ class Iridium implements
         ConfigureJavaVersionImpl,
         ConfigureMavenImpl,
         SonatypePublishingImpl,
-        ConfigureWrapperImpl,
         ConfigureJavadocImpl,
         ConfigureArtifactsImpl,
         ConfigureCheckstyleImpl,
@@ -32,7 +30,6 @@ class Iridium implements
         configureSonatypePublishing(project);
         configureJavaVersion(project);
         configureMaven(project);
-        configureWrapper(project);
         configureJavadoc(project);
     }
 }

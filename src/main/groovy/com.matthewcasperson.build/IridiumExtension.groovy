@@ -7,7 +7,6 @@ import com.matthewcasperson.build.services.impl.shared.ConfigureCheckstyleImpl
 import com.matthewcasperson.build.services.impl.shared.ConfigureJavaVersionImpl
 import com.matthewcasperson.build.services.impl.shared.ConfigureJavadocImpl
 import com.matthewcasperson.build.services.impl.shared.ConfigureMavenImpl
-import com.matthewcasperson.build.services.impl.shared.ConfigureWrapperImpl
 import com.matthewcasperson.build.services.impl.shared.ConfigureXercesVersionImpl
 import com.matthewcasperson.build.services.impl.shared.SonatypePublishingImpl
 import org.gradle.api.Plugin
